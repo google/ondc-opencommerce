@@ -1,0 +1,14 @@
+{
+  "port": 8080,
+  "subscriberID": "test",
+  "projectID": "bit-ondc",
+  "secretID": "keys",
+  "registryURL": "http://10.128.15.193:8003",
+  "bppURLs": [
+    "http://10.128.15.194:8001"
+  ],
+  "bapURLs": [
+    "http://10.128.0.28:8001"
+  ],
+  "keyID": "22a8a67a-76d9-459b-867c-085dda2939ec"
+}

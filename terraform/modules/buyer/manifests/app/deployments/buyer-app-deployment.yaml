@@ -1,0 +1,54 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: "apps/v1"
+kind: Deployment
+metadata:
+  name: buyer-app
+  namespace: buyer-app
+  labels:
+    app: buyer-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: buyer-app
+  template:
+    metadata:
+      labels:
+        app: buyer-app
+    spec:
+      serviceAccount: ${env_prefix}buyer-app-sa
+      nodeSelector:
+        iam.gke.io/gke-metadata-server-enabled: "true"
+      containers:
+        - name: buyer-app
+          image: "asia-southeast1-docker.pkg.dev/bit-ondc/ondc-dev/buyer-app-service"
+          ports:
+            - name: http
+              port: 8080
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: CONFIG
+              value: "/config/config.json"
+          volumeMounts:
+            - name: config-volume
+              readOnly: true
+              mountPath: /config/config.json
+              subPath: config.json
+      volumes:
+        - name: config-volume
+          configMap:
+            name: buyer-app-config

@@ -1,0 +1,33 @@
+{
+  "context": {
+    "domain": "nic2004:52110",
+    "country": "string",
+    "city": "string",
+    "action": "search",
+    "core_version": "string",
+    "bap_id": "string",
+    "bap_uri": "string",
+    "bpp_id": "string",
+    "bpp_uri": "string",
+    "transaction_id": "9eb59fd0-5de7-4a13-aee9-58cb1d9cccfa",
+    "message_id": "59c5309a-fd98-4617-a6fd-b44a831a16c7",
+    "timestamp": "2023-05-05T09:16:15.367Z",
+    "key": "string",
+    "ttl": "string"
+  },
+  "message": {
+    "rating_category": "string",
+    "id": "string",
+    "value": 5,
+    "feedback_form": [
+      {
+        "id": "string",
+        "parent_id": "string",
+        "question": "string",
+        "answer": "string",
+        "answer_type": "radio"
+      }
+    ],
+    "feedback_id": "string"
+  }
+}

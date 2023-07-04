@@ -1,0 +1,29 @@
+{
+  "context": {
+    "domain": "nic2004:52110",
+    "country": "string",
+    "city": "string",
+    "action": "search",
+    "core_version": "string",
+    "bap_id": "string",
+    "bap_uri": "string",
+    "bpp_id": "string",
+    "bpp_uri": "string",
+    "transaction_id": "9eb59fd0-5de7-4a13-aee9-58cb1d9cccfa",
+    "message_id": "80cb5c18-1bee-472d-8a0c-5d188e184819",
+    "timestamp": "2023-04-12T07:32:28.336Z",
+    "key": "string",
+    "ttl": "string"
+  },
+  "message": {
+    "phone": "string",
+    "email": "user@example.com",
+    "uri": "string"
+  },
+  "error": {
+    "type": "CONTEXT-ERROR",
+    "code": "string",
+    "path": "string",
+    "message": "string"
+  }
+}

@@ -1,0 +1,3 @@
+build --nocheck_visibility
+run --nocheck_visibility
+test --test_env=SPANNER_EMULATOR_ADDRESS=localhost:9010

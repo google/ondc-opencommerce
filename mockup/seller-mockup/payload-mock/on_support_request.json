@@ -1,0 +1,27 @@
+{
+  "context": {
+    "domain": "nic2004:52110",
+    "country": "IND",
+    "city": "std:011",
+    "action": "on_support",
+    "core_version": "1.1.0",
+    "bpp_id": "to_be_replaced",
+    "bpp_uri": "to_be_replaced",
+    "bap_id": "{{.bap_id}}",
+    "bap_uri": "{{.bap_uri}}",
+    "transaction_id": "{{.transaction_id}}",
+    "message_id": "{{.message_id}}",
+    "timestamp": "{{.timestamp}}"
+  },
+  "message": {
+    "phone": "string",
+    "email": "user@example.com",
+    "uri": "string"
+  },
+  "error": {
+    "type": "CONTEXT-ERROR",
+    "code": "string",
+    "path": "string",
+    "message": "string"
+  }
+}

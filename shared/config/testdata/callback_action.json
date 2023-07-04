@@ -1,0 +1,14 @@
+{
+  "projectID": "test-project",
+  "secretID": "test-secret",
+  "topicID": "test-topic",
+  "subscriptionID": [
+    "test-subscription"
+  ],
+  "instanceID": "test-instance",
+  "databaseID": "test-database",
+  "gatewayURL": "https://preprod.gateway.ondc.org",
+  "subscriberID": "bpp.com",
+  "subscriberURL": "https://bpp.com/api",
+  "keyID": "test-key"
+}

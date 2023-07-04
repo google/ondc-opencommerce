@@ -1,0 +1,26 @@
+{
+  "port": 8080,
+  "registryKeyset": {
+    "PublicSigningKey":     "test",
+    "PrivateSigningKey":    "tset",
+    "PublicEncryptionKey":  "test",
+    "PrivateEncryptionKey": "test"
+  },
+  "keys":
+    [
+      {
+      "subscriber_id":     "test",
+			"UkID":             "22a8a67a-76d9-459b-867c-085dda2939ec",
+			"BrID":             "22a8a67a-76d9-459b-867c-085dda2939ec",
+			"Country":          "IND",
+			"City":             "std:080",
+			"Domain":           "nic2004:52110",
+			"signing_public_key": "cnVQH8aktwrAwbnKBhptu8+zfHyGokUgw5kLcZ9bD64=",
+			"encr_public_key":    "LXeNNM1/L8SrkhCEiMhAKyjuCN1bxlAbTxgBfjq+VRE=",
+			"valid_from":        "2022-04-05T05:56:52.470618Z3",
+			"valid_until":       "2026-04-05T05:56:52.470618Z7",
+			"Created":          "2026-04-05T05:56:52.470618Z7",
+			"Updated":          "2026-04-05T05:56:52.470618Z7"
+      }
+    ]
+}

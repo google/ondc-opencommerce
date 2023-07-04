@@ -1,0 +1,87 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
+
+go_library(
+    name = "callback-action-service_lib",
+    srcs = ["server.go"],
+    importpath = "partner-innovation.googlesource.com/googleondcaccelerator.git/seller-platform/callback-action-service",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//shared/clients/keyclient",
+        "//shared/clients/transactionclient",
+        "//shared/config",
+        "//shared/models/model",
+        "//shared/signing-authentication/authentication",
+        "@com_github_benbjohnson_clock//:clock",
+        "@com_github_golang_glog//:glog",
+        "@com_google_cloud_go_pubsub//:pubsub",
+        "@org_golang_x_sync//errgroup",
+    ],
+)
+
+go_binary(
+    name = "callback-action-service",
+    embed = [":callback-action-service_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_image(
+    name = "go_image",
+    embed = [":callback-action-service_lib"],
+    goarch = "amd64",
+    goos = "linux",
+    pure = "on",
+    static = "on",
+    visibility = ["//visibility:public"],
+)
+
+container_image(
+    name = "image",
+    base = ":go_image",
+    ports = ["8080"],
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "callback-action-service_test",
+    srcs = ["server_test.go"],
+    data = glob(["testdata/**"]),
+    embed = [":callback-action-service_lib"],
+    embedsrcs = [
+        "testdata/on_cancel_request.json",
+        "testdata/on_confirm_request.json",
+        "testdata/on_init_request.json",
+        "testdata/on_rating_request.json",
+        "testdata/on_search_request.json",
+        "testdata/on_select_request.json",
+        "testdata/on_status_request.json",
+        "testdata/on_support_request.json",
+        "testdata/on_track_request.json",
+        "testdata/on_update_request.json",
+    ],
+    deps = [
+        "//shared/clients/keyclienttest",
+        "//shared/clients/transactionclient",
+        "//shared/config",
+        "//shared/pubsubtest",
+        "//shared/transactiontest",
+        "@com_github_benbjohnson_clock//:clock",
+        "@com_github_google_uuid//:uuid",
+        "@com_google_cloud_go_pubsub//:pubsub",
+    ],
+)

@@ -1,0 +1,21 @@
+{
+  "context": {
+    "domain": "nic2004:52110",
+    "country": "string",
+    "city": "string",
+    "action": "search",
+    "core_version": "string",
+    "bap_id": "string",
+    "bap_uri": "string",
+    "bpp_id": "string",
+    "bpp_uri": "{{.}}",
+    "transaction_id": "9eb59fd0-5de7-4a13-aee9-58cb1d9cccfa",
+    "message_id": "42adfc80-0c16-450c-81be-cf772b8d1753",
+    "timestamp": "2023-05-05T09:14:29.672Z",
+    "key": "string",
+    "ttl": "string"
+  },
+  "message": {
+    "order_id": "string"
+  }
+}

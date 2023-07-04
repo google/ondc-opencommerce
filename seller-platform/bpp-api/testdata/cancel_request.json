@@ -1,0 +1,34 @@
+{
+  "context": {
+    "domain": "nic2004:52110",
+    "country": "string",
+    "city": "string",
+    "action": "search",
+    "core_version": "string",
+    "bap_id": "string",
+    "bap_uri": "string",
+    "bpp_id": "string",
+    "bpp_uri": "string",
+    "transaction_id": "9eb59fd0-5de7-4a13-aee9-58cb1d9cccfa",
+    "message_id": "39ba4219-bcf9-4631-807b-e76f4d60826f",
+    "timestamp": "2023-05-05T09:15:22.619Z",
+    "key": "string",
+    "ttl": "string"
+  },
+  "message": {
+    "order_id": "string",
+    "cancellation_reason_id": "string",
+    "descriptor": {
+      "name": "string",
+      "code": "string",
+      "symbol": "string",
+      "short_desc": "string",
+      "long_desc": "string",
+      "images": [
+        "string"
+      ],
+      "audio": "string",
+      "3d_render": "string"
+    }
+  }
+}

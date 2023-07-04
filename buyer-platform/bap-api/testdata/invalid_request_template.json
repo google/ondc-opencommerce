@@ -1,0 +1,16 @@
+{
+  "context": {
+    "country": "string",
+    "city": "string",
+    "core_version": "string",
+    "bap_id": "string",
+    "bap_uri": "string",
+    "bpp_id": "string",
+    "bpp_uri": "string",
+    "transaction_id": "9eb59fd0-5de7-4a13-aee9-58cb1d9cccfa",
+    "message_id": "{{.}}",
+    "timestamp": "2023-03-08T07:57:55.874Z",
+    "key": "string",
+    "ttl": "string"
+  }
+}

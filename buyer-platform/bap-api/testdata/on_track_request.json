@@ -1,0 +1,116 @@
+{
+  "context": {
+    "domain": "nic2004:52110",
+    "country": "string",
+    "city": "string",
+    "action": "search",
+    "core_version": "string",
+    "bap_id": "string",
+    "bap_uri": "string",
+    "bpp_id": "string",
+    "bpp_uri": "string",
+    "transaction_id": "9eb59fd0-5de7-4a13-aee9-58cb1d9cccfa",
+    "message_id": "87f2a355-caf2-4e02-89e7-ddf2b4fbdd1c",
+    "timestamp": "2023-04-12T07:29:01.577Z",
+    "key": "string",
+    "ttl": "string"
+  },
+  "message": {
+    "tracking": {
+      "id": "string",
+      "url": "string",
+      "location": {
+        "id": "string",
+        "descriptor": {
+          "name": "string",
+          "code": "string",
+          "symbol": "string",
+          "short_desc": "string",
+          "long_desc": "string",
+          "images": [
+            "string"
+          ],
+          "audio": "string",
+          "3d_render": "string"
+        },
+        "gps": "-5.0776732446224761545972748980854714024127866128005423972787,                                                                           -180",
+        "address": {
+          "door": "string",
+          "name": "string",
+          "building": "string",
+          "street": "string",
+          "locality": "string",
+          "ward": "string",
+          "city": "string",
+          "state": "string",
+          "country": "string",
+          "area_code": "string"
+        },
+        "station_code": "string",
+        "city": {
+          "name": "string",
+          "code": "string"
+        },
+        "country": {
+          "name": "string",
+          "code": "string"
+        },
+        "circle": {
+          "gps": "+90,                                                                                    100.84",
+          "radius": {
+            "type": "CONSTANT",
+            "value": 0,
+            "estimated_value": 0,
+            "computed_value": 0,
+            "range": {
+              "min": 0,
+              "max": 0
+            },
+            "unit": "string"
+          }
+        },
+        "polygon": "string",
+        "3dspace": "string",
+        "time": {
+          "label": "string",
+          "timestamp": "2023-08-16T10:33:57.395Z",
+          "duration": "string",
+          "range": {
+            "start": "2023-08-16T10:33:57.395Z",
+            "end": "2023-08-16T10:33:57.395Z"
+          },
+          "days": "string",
+          "schedule": {
+            "frequency": "string",
+            "holidays": [
+              "2023-08-16T10:33:57.395Z"
+            ],
+            "times": [
+              "2023-08-16T10:33:57.395Z"
+            ]
+          }
+        }
+      },
+      "status": "active",
+      "tags": {
+        "display": true,
+        "code": "string",
+        "name": "string",
+        "list": [
+          {
+            "code": "string",
+            "name": "string",
+            "value": "string",
+            "display": true
+          }
+        ]
+      }
+    }
+  },
+  "error": {
+    "type": "CONTEXT-ERROR",
+    "code": "string",
+    "path": "string",
+    "message": "string"
+  }
+}

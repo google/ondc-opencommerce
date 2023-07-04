@@ -1,0 +1,11 @@
+{
+  "message": {
+    "ack": {
+      "status": "NACK"
+    }
+  },
+  "error": {
+    "type": "JSON-SCHEMA-ERROR",
+    "code": "30000"
+  }
+}

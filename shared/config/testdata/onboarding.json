@@ -1,0 +1,7 @@
+{
+  "projectID": "bit-ondc",
+  "port": 8080,
+  "requestID": "340dff12-661c-40b1-8aba-e4c20046aeda",
+  "secretID": "test-secret",
+  "registryEncryptPubKey": "MCowBQYDK2VuAyEAa9Wbpvd9SsrpOZFcynyt/TO3x0Yrqyys4NUGIvyxX2Q="
+}

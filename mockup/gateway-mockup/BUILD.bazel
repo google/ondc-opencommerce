@@ -1,0 +1,62 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
+
+go_library(
+    name = "gateway-mockup_lib",
+    srcs = ["server.go"],
+    importpath = "partner-innovation.googlesource.com/googleondcaccelerator.git/mockup/gateway-mockup",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//shared/clients/keyclient",
+        "//shared/clients/registryclient",
+        "//shared/config",
+        "//shared/errorcode",
+        "//shared/middleware",
+        "//shared/models/model",
+        "//shared/signing-authentication/authentication",
+        "@com_github_benbjohnson_clock//:clock",
+        "@com_github_golang_glog//:glog",
+    ],
+)
+
+go_binary(
+    name = "gateway-mockup",
+    embed = [":gateway-mockup_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_image(
+    name = "gateway_go_image",
+    embed = [":gateway-mockup_lib"],
+    env = {
+        "CONFIG": "/config.json",
+    },
+    goarch = "amd64",
+    goos = "linux",
+    pure = "on",
+    static = "on",
+    visibility = ["//visibility:public"],
+)
+
+container_image(
+    name = "image_gateway",
+    base = ":gateway_go_image",
+    files = ["config.json"],
+    ports = ["8080"],
+    visibility = ["//visibility:public"],
+)

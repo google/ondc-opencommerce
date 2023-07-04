@@ -1,0 +1,294 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:0124",
+    "action": "on_confirm",
+    "core_version": "1.2.0",
+    "bpp_id": "to_be_replaced",
+    "bpp_uri": "to_be_replaced",
+    "bap_id": "{{.bap_id}}",
+    "bap_uri": "{{.bap_uri}}",
+    "transaction_id": "{{.transaction_id}}",
+    "message_id": "{{.message_id}}",
+    "timestamp": "{{.timestamp}}"
+  },
+  "message": {
+    "order": {
+      "id": "O1",
+      "state": "Accepted",
+      "provider": {
+        "id": "P1",
+        "locations": [
+          {
+            "id": "L1"
+          }
+        ],
+        "rateable": true
+      },
+      "items": [
+        {
+          "id": "I1",
+          "fulfillment_id": "F1",
+          "quantity": {
+            "count": 1
+          }
+        }
+      ],
+      "billing": {
+        "name": "ONDC buyer",
+        "address": {
+          "name": "My house #",
+          "building": "My building name",
+          "door": "B005 aaspire heights",
+          "locality": "My street name",
+          "city": "Bengaluru",
+          "state": "Karnataka",
+          "country": "IND",
+          "area_code": "560037"
+        },
+        "email": "nobody@nomail.com",
+        "phone": "9886098860",
+        "created_at": "2023-02-03T09:00:00.000Z",
+        "updated_at": "2023-02-03T09:00:00.000Z",
+        "tax_number": "1111"
+      },
+      "fulfillments": [
+        {
+          "id": "F1",
+          "@ondc/org/provider_name": "Loadshare",
+          "state": {
+            "descriptor": {
+              "code": "Pending"
+            }
+          },
+          "type": "Delivery",
+          "tracking": false,
+          "start": {
+            "location": {
+              "id": "L1",
+              "descriptor": {
+                "name": "ABC Store"
+              },
+              "gps": "12.956399,77.636803"
+            },
+            "time": {
+              "range": {
+                "start": "2023-02-03T10:00:00.000Z",
+                "end": "2023-02-03T10:30:00.000Z"
+              }
+            },
+            "instructions": {
+              "name": "Status for pickup",
+              "short_desc": "Pickup Confirmation Code"
+            },
+            "contact": {
+              "phone": "9886098860",
+              "email": "nobody@nomail.com"
+            }
+          },
+          "end": {
+            "location": {
+              "gps": "12.9492953,77.7019878",
+              "address": {
+                "name": "My house #",
+                "building": "My building name",
+                "door": "B005 aaspire heights",
+                "locality": "My street name",
+                "city": "Bengaluru",
+                "state": "Karnataka",
+                "country": "IND",
+                "area_code": "560037"
+              }
+            },
+            "time": {
+              "range": {
+                "start": "2023-02-03T11:00:00.000Z",
+                "end": "2023-02-03T11:30:00.000Z"
+              }
+            },
+            "instructions": {
+              "name": "Status for drop",
+              "short_desc": "Delivery Confirmation Code"
+            },
+            "contact": {
+              "phone": "9886098860"
+            }
+          },
+          "rateable": true
+        }
+      ],
+      "quote": {
+        "price": {
+          "currency": "INR",
+          "value": "245"
+        },
+        "breakup": [
+          {
+            "@ondc/org/item_id": "I1",
+            "@ondc/org/item_quantity": {
+              "count": 1
+            },
+            "title": "Atta",
+            "@ondc/org/title_type": "item",
+            "price": {
+              "currency": "INR",
+              "value": "170"
+            },
+            "item": {
+              "id": "I1",
+              "matched": true,
+              "descriptor": {
+                "name": "Atta",
+                "code": "1:XXXXXXXXXXXXX",
+                "symbol": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Atta-05.jpg/1024px-Atta-05.jpg",
+                "short_desc": "Ashirwad Atta 5kg",
+                "long_desc": "Ashirwad Atta 5kg",
+                "images": [
+                  "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Atta-05.jpg/1024px-Atta-05.jpg"
+                ]
+              },
+              "quantity": {
+                "available": {
+                  "count": 1
+                },
+                "maximum": {
+                  "count": 2
+                }
+              },
+              "price": {
+                "currency": "INR",
+                "value": "170.0",
+                "maximum_value": "180.0"
+              },
+              "category_id": "Packaged Commodities",
+              "fulfillment_id": "1",
+              "location_id": "L1",
+              "recommended": true,
+              "@ondc/org/returnable": true,
+              "@ondc/org/cancellable": true,
+              "@ondc/org/return_window": "P7D",
+              "@ondc/org/seller_pickup_return": false,
+              "@ondc/org/time_to_ship": "PT45M",
+              "@ondc/org/available_on_cod": false,
+              "@ondc/org/contact_details_consumer_care": "Ramesh,ramesh@abc.com,18004254444",
+              "@ondc/org/statutory_reqs_packaged_commodities": {
+                "manufacturer_or_packer_name": "ITC",
+                "manufacturer_or_packer_address": "ITC Quality Care Cell,P.O Box No.592,Bangalore-560005",
+                "common_or_generic_name_of_commodity": "Ashirwad Atta",
+                "net_quantity_or_measure_of_commodity_in_pkg": "5kg",
+                "month_year_of_manufacture_packing_import": "01/2023",
+                "imported_product_country_of_origin": "IND"
+              },
+              "@ondc/org/statutory_reqs_prepackaged_food": {
+                "nutritional_info": "Energy(KCal)-(per 100kg) 420,(per serving 50g)250;Protein(g)-(per 100kg) 12,(per serving 50g) 6",
+                "additives_info": "Preservatives,Artificial Colours",
+                "brand_owner_FSSAI_license_no": "12345678901234",
+                "other_FSSAI_license_no": "12345678901234",
+                "importer_FSSAI_license_no": "12345678901234",
+                "imported_product_country_of_origin": "IND"
+              },
+              "@ondc/org/mandatory_reqs_veggies_fruits": {
+                "net_quantity": "100g"
+              },
+              "tags": {
+                "veg": "yes",
+                "non_veg": "no"
+              }
+            }
+          },
+          {
+            "@ondc/org/item_id": "F1",
+            "@ondc/org/item_quantity": {
+              "count": 1
+            },
+            "title": "Delivery charges",
+            "@ondc/org/title_type": "delivery",
+            "price": {
+              "currency": "INR",
+              "value": "50"
+            }
+          },
+          {
+            "@ondc/org/item_id": "F1",
+            "@ondc/org/item_quantity": {
+              "count": 1
+            },
+            "title": "Packing charges",
+            "@ondc/org/title_type": "packing",
+            "price": {
+              "currency": "INR",
+              "value": "25"
+            }
+          },
+          {
+            "@ondc/org/item_id": "I1",
+            "@ondc/org/item_quantity": {
+              "count": 1
+            },
+            "title": "Tax",
+            "@ondc/org/title_type": "tax",
+            "price": {
+              "currency": "INR",
+              "value": "0"
+            }
+          },
+          {
+            "@ondc/org/item_id": "I1",
+            "@ondc/org/item_quantity": {
+              "count": 1
+            },
+            "title": "Discount",
+            "@ondc/org/title_type": "discount",
+            "price": {
+              "currency": "INR",
+              "value": "-10"
+            }
+          },
+          {
+            "@ondc/org/item_id": "F1",
+            "@ondc/org/item_quantity": {
+              "count": 1
+            },
+            "title": "Convenience Fee",
+            "@ondc/org/title_type": "misc",
+            "price": {
+              "currency": "INR",
+              "value": "10"
+            }
+          }
+        ],
+        "ttl": "P1D"
+      },
+      "payment": {
+        "uri": "https://ondc.transaction.com/payment",
+        "tl_method": "http/get",
+        "params": {
+          "currency": "INR",
+          "transaction_id": "3937",
+          "amount": "245"
+        },
+        "status": "PAID",
+        "type": "ON-ORDER",
+        "collected_by": "BAP",
+        "@ondc/org/buyer_app_finder_fee_type": "Percent",
+        "@ondc/org/buyer_app_finder_fee_amount": "3",
+        "@ondc/org/settlement_details": [
+          {
+            "settlement_counterparty": "seller-app",
+            "settlement_phase": "sale-amount",
+            "beneficiary_name": "xxxxx",
+            "settlement_type": "upi",
+            "upi_address": "gft@oksbi",
+            "settlement_bank_account_no": "XXXXXXXXXX",
+            "settlement_ifsc_code": "XXXXXXXXX",
+            "bank_name": "xxxx",
+            "branch_name": "xxxx"
+          }
+        ]
+      },
+      "created_at": "2023-02-03T09:30:00.000Z",
+      "updated_at": "2023-02-03T09:31:30.000Z"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "subscriberID": "bpp.com",
+  "projectID": "test-project",
+  "port": 8080,
+  "topicID": "test-topic",
+  "registryURL": "https://preprod.registry.ondc.org/ondc",
+  "gatewayURL": "https://preprod.gateway.ondc.org",
+  "instanceID": "test-instance",
+  "databaseID": "test-database"
+}
