@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: registry-mockup
-          image: "asia-southeast1-docker.pkg.dev/bit-ondc/ondc-dev/registry-mockup:latest"
+          image: "${location}-docker.pkg.dev/${project}/${repository}/registry-mockup:latest"
           resources:
             limits:
               memory: "256Mi"

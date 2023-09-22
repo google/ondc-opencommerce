@@ -34,7 +34,7 @@ spec:
         iam.gke.io/gke-metadata-server-enabled: "true"
       containers:
         - name: bap-apis
-          image: "asia-southeast1-docker.pkg.dev/bit-ondc/ondc-dev/bap-api:latest"
+          image: "${location}-docker.pkg.dev/${project}/${repository}/bap-api:latest"
           env:
             - name: CONFIG
               value: "/config/config.json"

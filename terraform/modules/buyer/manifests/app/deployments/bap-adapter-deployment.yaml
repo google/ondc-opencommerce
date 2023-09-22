@@ -34,7 +34,7 @@ spec:
         iam.gke.io/gke-metadata-server-enabled: "true"
       containers:
         - name: bap-adapter
-          image: "asia-southeast1-docker.pkg.dev/bit-ondc/ondc-dev/bap-adapter-service:latest"
+          image: "${location}-docker.pkg.dev/${project}/${repository}/bap-adapter-service:latest"
           env:
             - name: CONFIG
               value: "/config/config.json"

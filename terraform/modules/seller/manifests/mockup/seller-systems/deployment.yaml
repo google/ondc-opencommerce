@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: seller-systems
-          image: "asia-southeast1-docker.pkg.dev/bit-ondc/ondc-dev/seller-systems-service:latest"
+          image: "${location}-docker.pkg.dev/${project}/${repository}/seller-systems-service:latest"
           resources:
             limits:
               memory: "1024Mi"

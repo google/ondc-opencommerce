@@ -34,7 +34,7 @@ spec:
         iam.gke.io/gke-metadata-server-enabled: "true"
       containers:
         - name: seller-adapter-service
-          image: "asia-southeast1-docker.pkg.dev/bit-ondc/ondc-dev/seller-adapter-service:latest"
+          image: "${location}-docker.pkg.dev/${project}/${repository}/seller-adapter-service:latest"
           env:
             - name: CONFIG
               value: "/config/config.json"

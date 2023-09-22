@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: gateway-mockup
-          image: "asia-southeast1-docker.pkg.dev/bit-ondc/ondc-dev/gateway-mockup:latest"
+          image: "${location}-docker.pkg.dev/${project}/${repository}/gateway-mockup:latest"
           resources:
             limits:
               memory: "128Mi"
