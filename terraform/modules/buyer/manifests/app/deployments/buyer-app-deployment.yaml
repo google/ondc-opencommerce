@@ -34,7 +34,7 @@ spec:
         iam.gke.io/gke-metadata-server-enabled: "true"
       containers:
         - name: buyer-app
-          image: "asia-southeast1-docker.pkg.dev/bit-ondc/ondc-dev/buyer-app-service"
+          image: "${location}-docker.pkg.dev/${project}/${repository}/buyer-app-service"
           ports:
             - name: http
               port: 8080

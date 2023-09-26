@@ -34,7 +34,7 @@ spec:
         iam.gke.io/gke-metadata-server-enabled: "true"
       containers:
         - name: request-action
-          image: "asia-southeast1-docker.pkg.dev/bit-ondc/ondc-dev/request-action-service:latest"
+          image: "${location}-docker.pkg.dev/${project}/${repository}/request-action-service:latest"
           env:
             - name: CONFIG
               value: "/config/config.json"

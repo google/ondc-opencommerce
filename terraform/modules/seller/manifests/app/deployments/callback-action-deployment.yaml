@@ -34,7 +34,7 @@ spec:
         iam.gke.io/gke-metadata-server-enabled: "true"
       containers:
         - name: callback-action
-          image: "asia-southeast1-docker.pkg.dev/bit-ondc/ondc-dev/callback-action-service:latest"
+          image: "${location}-docker.pkg.dev/${project}/${repository}/callback-action-service:latest"
           env:
             - name: CONFIG
               value: "/config/config.json"
