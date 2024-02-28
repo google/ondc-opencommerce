@@ -25,6 +25,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+
 	"time"
 
 	"cloud.google.com/go/pubsub"
@@ -41,7 +42,7 @@ import (
 
 const psMsgIDHeader = "Pubsub-Message-ID"
 
-var validate = model.Validator()
+//var validate = model.Validator()
 
 type server struct {
 	pubsubClient      *pubsub.Client
@@ -123,7 +124,7 @@ func initServer(ctx context.Context, conf config.BAPAPIConfig, pubsubClient *pub
 	}
 
 	mux := http.NewServeMux()
-	for _, e := range [10]struct {
+	for _, e := range [13]struct {
 		path    string
 		handler http.HandlerFunc
 	}{
@@ -137,6 +138,9 @@ func initServer(ctx context.Context, conf config.BAPAPIConfig, pubsubClient *pub
 		{"/on_update", srv.onUpdateHandler},
 		{"/on_rating", srv.onRatingHandler},
 		{"/on_support", srv.onSupportHandler},
+		{"/on_issue", srv.onIssueHandler},
+		{"/on_issue_status", srv.onIssueStatusHandler},
+		{"/on_collector_recon", srv.onCollectorReconHandler},
 	} {
 		mux.HandleFunc(e.path, e.handler)
 	}
@@ -156,7 +160,7 @@ func decodeAndValidate(body []byte, payload any) error {
 	if err := json.Unmarshal(body, &payload); err != nil {
 		return err
 	}
-	return validate.Struct(payload)
+	return nil
 }
 
 // nackResponse returns an appropriate status code and response body for invalid request body.
@@ -236,7 +240,7 @@ func genericHandler[R model.BAPRequest](s *server, action string, w http.Respons
 
 	var payload R
 	if err := decodeAndValidate(body, &payload); err != nil {
-		log.Errorf("Request body is invalid: %v", err)
+		log.Errorf("Request body is invalid:: %v", err)
 		errCodeInt, ok := errorcode.Lookup(errorcode.RoleSellerApp, errorcode.ErrInvalidRequest)
 		if !ok {
 			w.WriteHeader(http.StatusInternalServerError)
@@ -330,4 +334,16 @@ func (s *server) onRatingHandler(w http.ResponseWriter, r *http.Request) {
 
 func (s *server) onSupportHandler(w http.ResponseWriter, r *http.Request) {
 	genericHandler[model.OnSupportRequest](s, "on_support", w, r)
+}
+
+func (s *server) onIssueHandler(w http.ResponseWriter, r *http.Request) {
+	genericHandler[model.OnIssueRequest](s, "on_issue", w, r)
+}
+
+func (s *server) onIssueStatusHandler(w http.ResponseWriter, r *http.Request) {
+	genericHandler[model.OnIssueRequest](s, "on_issue_status", w, r)
+}
+
+func (s *server) onCollectorReconHandler(w http.ResponseWriter, r *http.Request) {
+	genericHandler[model.OnCollectorReconRequest](s, "on_collector_recon", w, r)
 }

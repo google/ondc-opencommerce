@@ -18,8 +18,8 @@ import "encoding/json"
 
 // GenericCallbackRequest is a generic form of all BPP callback request.
 type GenericCallbackRequest struct {
-	Context *Context         `json:"context" validate:"required"`
-	Message *json.RawMessage `json:"message" validate:"required"`
+	Context *Context         `json:"context"`
+	Message *json.RawMessage `json:"message"`
 	Error   *json.RawMessage `json:"error,omitempty"`
 }
 
@@ -69,6 +69,23 @@ type OnConfirmRequest struct {
 // OnConfirmMessage is an inner message of OnConfirmRequest.
 type OnConfirmMessage struct {
 	Order *Order `json:"order" validate:"required"`
+}
+
+type OnIssueRequest struct {
+	Context *Context      `json:"context" validate:"required"`
+	Message *IssueMessage `json:"message" validate:"required"`
+	Error   *Error        `json:"error,omitempty"`
+}
+type OnIssueStatusRequest struct {
+	Context *Context      `json:"context" validate:"required"`
+	Message *IssueMessage `json:"message" validate:"required"`
+	Error   *Error        `json:"error,omitempty"`
+}
+
+type OnCollectorReconRequest struct {
+	Context *Context               `json:"context" validate:"required"`
+	Message *CollectorReconMessage `json:"message" validate:"required"`
+	Error   *Error                 `json:"error,omitempty"`
 }
 
 // OnTrackRequest contains an on_track Catalog for products and services.
@@ -142,9 +159,11 @@ type OnSupportMessage struct {
 
 // BAPRequest represent all request schemas of BAP API.
 type BAPRequest interface {
-	OnSearchRequest | OnSelectRequest | OnInitRequest | OnConfirmRequest | OnStatusRequest | OnTrackRequest | OnCancelRequest | OnUpdateRequest | OnRatingRequest | OnSupportRequest
+	OnSearchRequest | OnSelectRequest | OnInitRequest | OnConfirmRequest | OnStatusRequest | OnTrackRequest | OnCancelRequest | OnUpdateRequest | OnRatingRequest | OnSupportRequest | OnIssueRequest | OnCollectorReconRequest | OnIssueStatusRequest
 	GetContext() Context
 }
+
+func (r GenericCallbackRequest) GetContext() Context { return *r.Context }
 
 // GetContext returns the ONDC context of the request.
 func (r OnSearchRequest) GetContext() Context { return *r.Context }
@@ -175,3 +194,10 @@ func (r OnRatingRequest) GetContext() Context { return *r.Context }
 
 // GetContext returns the ONDC context of the request.
 func (r OnSupportRequest) GetContext() Context { return *r.Context }
+
+func (r OnIssueRequest) GetContext() Context { return *r.Context }
+
+func (r OnIssueStatusRequest) GetContext() Context { return *r.Context }
+
+func (r OnCollectorReconRequest) GetContext() Context { return *r.Context }
+

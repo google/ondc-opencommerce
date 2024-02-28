@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: "apps/v1"
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: buyer-app
@@ -34,10 +34,9 @@ spec:
         iam.gke.io/gke-metadata-server-enabled: "true"
       containers:
         - name: buyer-app
-          image: "${location}-docker.pkg.dev/${project}/${repository}/buyer-app-service"
+          image: "asia-southeast1-docker.pkg.dev/ondc-l1-accl-180920232021/ondc-l1-repo/buyer-app-service:latest"
           ports:
             - name: http
-              port: 8080
               containerPort: 8080
               protocol: TCP
           env:

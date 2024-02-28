@@ -18,5 +18,5 @@
 seller_services=('server_image_pusher_bpp-apis' 'server_image_pusher_seller-adapter-service' 'server_image_pusher_callback-action-service')
 for service in ${seller_services[@]}; do
   echo "publish seller $service"
-  bazel run //docker/publish/seller:$service --define DOCKER_REGISTRY="${1}" --define DOCKER_REPOSITORY="${2}"
+  bazelisk run //docker/publish/seller:$service --define DOCKER_REGISTRY="${1}" --define DOCKER_REPOSITORY="${2}"
 done

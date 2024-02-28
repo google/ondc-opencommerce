@@ -37,7 +37,7 @@ import (
 
 const psMsgIDHeader = "Pubsub-Message-ID"
 
-var validate = model.Validator()
+// var validate = model.Validator()
 
 type server struct {
 	pubsubClient *pubsub.Client
@@ -96,7 +96,7 @@ func initServer(ctx context.Context, conf config.BuyerAppConfig, pubsubClient *p
 	}
 
 	mux := http.NewServeMux()
-	apis := [10]struct {
+	apis := [13]struct {
 		path    string
 		handler http.HandlerFunc
 	}{
@@ -110,6 +110,9 @@ func initServer(ctx context.Context, conf config.BuyerAppConfig, pubsubClient *p
 		{"/update", srv.updateHandler},
 		{"/rating", srv.ratingHandler},
 		{"/support", srv.supportHandler},
+		{"/issue", srv.issueHandler},
+		{"/issue_status", srv.issueStatusHandler},
+		{"/collector_recon", srv.collectorReconHandler},
 	}
 	for _, api := range apis {
 		mux.HandleFunc(api.path, api.handler)
@@ -145,7 +148,7 @@ func genericHandler[R model.BPPRequest](s *server, action string, w http.Respons
 	var payload R
 	if err := decodeAndValidate(body, &payload); err != nil {
 		nackResponse(w)
-		log.Errorf("Request body is invalid: %v", err)
+		log.Errorf("Request body is invalid::: %v", err)
 		return
 	}
 
@@ -166,7 +169,7 @@ func decodeAndValidate(body []byte, payload any) error {
 	if err := json.Unmarshal(body, &payload); err != nil {
 		return err
 	}
-	return validate.Struct(payload)
+	return nil
 }
 
 // ackResponse returns an appropriate status code and response body for valid request body.
@@ -274,4 +277,16 @@ func (s *server) ratingHandler(w http.ResponseWriter, r *http.Request) {
 
 func (s *server) supportHandler(w http.ResponseWriter, r *http.Request) {
 	genericHandler[model.SupportRequest](s, "support", w, r)
+}
+
+func (s *server) issueHandler(w http.ResponseWriter, r *http.Request) {
+	genericHandler[model.IssueRequest](s, "issue", w, r)
+}
+
+func (s *server) issueStatusHandler(w http.ResponseWriter, r *http.Request) {
+	genericHandler[model.IssueStatusRequest](s, "issue_status", w, r)
+}
+
+func (s *server) collectorReconHandler(w http.ResponseWriter, r *http.Request) {
+	genericHandler[model.CollectorReconRequest](s, "collector_recon", w, r)
 }

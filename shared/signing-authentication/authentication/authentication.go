@@ -151,6 +151,7 @@ func VerifySignature(signature string, payload, publicKey []byte, createdTimesta
 // CreateAuthSignature creates a signature string in ONDC format.
 func CreateAuthSignature(payload, keysetJSON []byte, createdTimestamp, expiredTimestamp int64, subscriberID, keyID string) (string, error) {
 	signature, err := SignPayload(payload, keysetJSON, createdTimestamp, expiredTimestamp)
+
 	if err != nil {
 		return "", err
 	}
@@ -167,6 +168,7 @@ func CreateAuthSignature(payload, keysetJSON []byte, createdTimestamp, expiredTi
 }
 
 func createSigningString(payload []byte, createdTimestamp, expiredTimestamp int64) string {
+
 	digest := blake2b.Sum512(payload)
 	digestB64 := base64.StdEncoding.EncodeToString(digest[:])
 	return fmt.Sprintf(

@@ -20,8 +20,8 @@ import (
 
 // GenericRequest is a generic form of all BPP request.
 type GenericRequest struct {
-	Context *Context         `json:"context" validate:"required"`
-	Message *json.RawMessage `json:"message" validate:"required"`
+	Context *Context         `json:"context"`
+	Message *json.RawMessage `json:"message"`
 }
 
 // SearchRequest contains search intent for products and services.
@@ -39,6 +39,31 @@ type SearchMessage struct {
 type SelectRequest struct {
 	Context *Context       `json:"context" validate:"required"`
 	Message *SelectMessage `json:"message" validate:"required"`
+}
+
+type IssueRequest struct {
+	Context *Context      `json:"context" validate:"required"`
+	Message *IssueMessage `json:"message" validate:"required"`
+}
+type IssueStatusRequest struct {
+	Context *Context      `json:"context" validate:"required"`
+	Message *IssueStatusMessage `json:"message" validate:"required"`
+}
+
+type IssueStatusMessage struct {
+	Issue string `json:"issue_id" validate:"required"`
+}
+type IssueMessage struct {
+	Issue any `json:"issue" validate:"required"`
+}
+
+type CollectorReconRequest struct {
+	Context *Context               `json:"context" validate:"required"`
+	Message *CollectorReconMessage `json:"message" validate:"required"`
+}
+
+type CollectorReconMessage struct {
+	Orderbook interface{} `json:"orderbook"`
 }
 
 // SelectMessage is an inner message of SelectRequest.
@@ -139,11 +164,13 @@ type SupportMessage struct {
 
 // BPPRequest represent all request schemas of BAP API.
 type BPPRequest interface {
-	SearchRequest | SelectRequest | InitRequest | ConfirmRequest | StatusRequest | TrackRequest | CancelRequest | UpdateRequest | RatingRequest | SupportRequest
+	SearchRequest | IssueRequest | IssueStatusRequest | SelectRequest | InitRequest | ConfirmRequest | StatusRequest | TrackRequest | CancelRequest | UpdateRequest | RatingRequest | SupportRequest | GenericRequest  | CollectorReconRequest
 	GetContext() Context
 }
 
-// GetContext returns the BAP URI in the context.
+func (r GenericRequest) GetContext() Context { return *r.Context }
+
+// GetContext returns the BAP URI body anyin the context.
 func (r SearchRequest) GetContext() Context { return *r.Context }
 
 // GetContext returns the BAP URI in the context.
@@ -172,3 +199,13 @@ func (r RatingRequest) GetContext() Context { return *r.Context }
 
 // GetContext returns the BAP URI in the context.
 func (r SupportRequest) GetContext() Context { return *r.Context }
+
+// GetContext returns the BAP URI in the context.
+func (r IssueRequest) GetContext() Context { return *r.Context }
+
+// GetContext returns the BAP URI in the context.
+func (r IssueStatusRequest) GetContext() Context { return *r.Context }
+
+
+func (r CollectorReconRequest) GetContext() Context { return *r.Context }
+

@@ -171,7 +171,7 @@ func (s *server) handleSubscription(ctx context.Context, sub *pubsub.Subscriptio
 
 		var originalReq model.GenericRequest
 		if err := json.Unmarshal(msg.Data, &originalReq); err != nil {
-			log.Errorf("Unmarshal request failed: %v", err)
+			log.Errorf("Unmarshal request failed:: %v", err)
 			return
 		}
 
@@ -277,6 +277,12 @@ func (s *server) storeTransaction(ctx context.Context, action string, requestBod
 		return storeTransaction[model.RatingRequest](ctx, s, action, requestBody, responseBody)
 	case "support":
 		return storeTransaction[model.SupportRequest](ctx, s, action, requestBody, responseBody)
+	case "issue":
+		return storeTransaction[model.IssueRequest](ctx, s, action, requestBody, requestBody)
+	case "issue_status":
+		return storeTransaction[model.IssueStatusRequest](ctx, s, action, requestBody, requestBody)
+	case "collector_recon":
+		return storeTransaction[model.CollectorReconRequest](ctx, s, action, requestBody, responseBody)
 	}
 	return nil
 }

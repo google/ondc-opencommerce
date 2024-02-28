@@ -34,28 +34,33 @@ var (
 	}
 
 	transactionAPIMap = map[string]int{
-		"search":     1,
-		"on_search":  2,
-		"select":     3,
-		"on_select":  4,
-		"init":       5,
-		"on_init":    6,
-		"confirm":    7,
-		"on_confirm": 8,
-		"status":     9,
-		"on_status":  10,
-		"track":      11,
-		"on_track":   12,
-		"cancel":     13,
-		"on_cancel":  14,
-		"update":     15,
-		"on_update":  16,
-		"rating":     17,
-		"on_rating":  18,
-		"support":    19,
-		"on_support": 20,
+		"search":          1,
+		"on_search":       2,
+		"select":          3,
+		"on_select":       4,
+		"init":            5,
+		"on_init":         6,
+		"confirm":         7,
+		"on_confirm":      8,
+		"status":          9,
+		"on_status":       10,
+		"track":           11,
+		"on_track":        12,
+		"cancel":          13,
+		"on_cancel":       14,
+		"update":          15,
+		"on_update":       16,
+		"rating":          17,
+		"on_rating":       18,
+		"support":         19,
+		"on_support":      20,
+		"issue":           21,
+		"on_issue":        22,
+		"issue_status":    23,
+		"on_issue_status": 24,
 	}
 )
+
 
 // Client is a wrapper of Spanner Client for storing ONDC transaction logs.
 type Client struct {

@@ -15,8 +15,8 @@
 
 # Change these variables for your project
 cluster_name="dev-buyer-cluster"
-region="us-central1"
-project_id="project-id"
+region="asia-southeast1"
+project_id="ondc-l1-accl-180920232021"
 
 # Optional: You can change this variable if you do not want to restart all deployments.
 deployments=("bap-adapter" "bap-apis" "buyer-app" "request-action")

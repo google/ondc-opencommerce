@@ -20,6 +20,7 @@ container_push(
     image = "//buyer-platform/buyer-app-service:image",
     registry = "$(DOCKER_REGISTRY)",
     repository = "$(DOCKER_REPOSITORY)/buyer-app-service",
+    tag = "buyer_app_service_customtag",
 )
 
 container_push(
@@ -28,6 +29,7 @@ container_push(
     image = "//buyer-platform/bap-api:image",
     registry = "$(DOCKER_REGISTRY)",
     repository = "$(DOCKER_REPOSITORY)/bap-api",
+    tag = "bap_api_customtag",
 )
 
 container_push(
@@ -36,6 +38,7 @@ container_push(
     image = "//buyer-platform/bap-adapter-service:image",
     registry = "$(DOCKER_REGISTRY)",
     repository = "$(DOCKER_REPOSITORY)/bap-adapter-service",
+    tag = "bap_adapter_service_customtag",
 )
 
 container_push(
@@ -44,4 +47,5 @@ container_push(
     image = "//buyer-platform/request-action-service:image",
     registry = "$(DOCKER_REGISTRY)",
     repository = "$(DOCKER_REPOSITORY)/request-action-service",
+    tag = "request_action_service_customtag",
 )

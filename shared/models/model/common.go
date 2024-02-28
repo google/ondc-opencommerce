@@ -97,7 +97,7 @@ type Agent struct {
 
 	// Since both `Person` and `contact` struct have `Tags` field,
 	// we need to add this `Tags` field to avoid ambiguity.
-	Tags *TagGroup `json:"tags,omitempty"`
+	Tags []TagGroup `json:"tags,omitempty"`
 
 	Rateable *Rateable `json:"rateable,omitempty"`
 }
@@ -246,7 +246,7 @@ type Category struct {
 
 	Time *Time `json:"time,omitempty"`
 
-	Tags *TagGroup `json:"tags,omitempty"`
+	Tags []TagGroup `json:"tags,omitempty"`
 }
 
 // Circle - Describes a circular area on the map
@@ -270,7 +270,7 @@ type Contact struct {
 
 	Email string `json:"email,omitempty"`
 
-	Tags *TagGroup `json:"tags,omitempty"`
+	Tags []TagGroup `json:"tags,omitempty"`
 }
 
 // Context - Describes a ONDC message context
@@ -284,7 +284,7 @@ type Context struct {
 	City *string `json:"city" validate:"required"`
 
 	// Defines the ONDC API call. Any actions other than the enumerated actions are not supported by ONDC Protocol
-	Action string `json:"action" validate:"oneof=search select init confirm update status track cancel rating support on_search on_select on_init on_confirm on_update on_status on_track on_cancel on_rating on_support"`
+	Action string `json:"action" validate:"oneof=search select init confirm update status track cancel rating support on_search on_select on_init on_confirm on_update on_status on_track on_cancel on_rating on_support issue on_issue issue_status on_issue_status"`
 
 	// Version of ONDC core API specification being used
 	CoreVersion *string `json:"core_version" validate:"required"`
@@ -339,7 +339,7 @@ type Credential struct {
 	// URL of the credential
 	URL string `json:"url,omitempty"`
 
-	Tags *TagGroup `json:"tags,omitempty"`
+	Tags []TagGroup `json:"tags,omitempty"`
 }
 
 // Descriptor - Describes the description of a real-world object.
@@ -531,7 +531,7 @@ type Fulfillment struct {
 
 	Rateable *Rateable `json:"rateable,omitempty"`
 
-	Tags *TagGroup `json:"tags,omitempty"`
+	Tags []TagGroup `json:"tags,omitempty"`
 }
 
 // FulfillmentStart - Details on the start of fulfillment
@@ -568,7 +568,7 @@ type Intent struct {
 
 	Item *Item `json:"item,omitempty"`
 
-	Tags *TagGroup `json:"tags,omitempty"`
+	Tags []TagGroup `json:"tags,omitempty"`
 }
 
 // Item - Describes a product or a service offered to the end consumer by the provider
@@ -715,7 +715,7 @@ type Item struct {
 		OtherPremises string `json:"other_premises,omitempty"`
 	} `json:"@ondc/org/statutory_reqs_prepackaged_food,omitempty"`
 
-	Tags *TagGroup `json:"tags,omitempty"`
+	Tags []interface{} `json:"tags,omitempty"`
 }
 
 // ItemQuantity - Describes count or amount of an item
@@ -804,7 +804,7 @@ type Offer struct {
 
 	Time *Time `json:"time,omitempty"`
 
-	Tags *TagGroup `json:"tags,omitempty"`
+	Tags []TagGroup `json:"tags,omitempty"`
 }
 
 type operatorAllOfExperience struct {
@@ -1006,7 +1006,7 @@ type Person struct {
 	// Gender of something, typically a Person, but possibly also fictional characters, animals, etc. While Male and Female may be used, text strings are also acceptable for people who do not identify as a binary gender
 	Gender string `json:"gender,omitempty"`
 
-	Tags *TagGroup `json:"tags,omitempty"`
+	Tags []TagGroup `json:"tags,omitempty"`
 }
 
 // Policy - Describes a policy. Allows for domain extension.
@@ -1076,7 +1076,7 @@ type Provider struct {
 
 	Rateable *Rateable `json:"rateable,omitempty"`
 
-	Tags *TagGroup `json:"tags,omitempty"`
+	Tags []TagGroup `json:"tags,omitempty"`
 }
 
 type providerLocationsInner struct {
@@ -1159,11 +1159,11 @@ type Rating struct {
 type Scalar struct {
 	Type *string `json:"type,omitempty" validate:"omitempty,oneof=CONSTANT VARIABLE"`
 
-	Value *float32 `json:"value" validate:"required"`
+	Value string `json:"value" validate:"required"`
 
-	EstimatedValue float32 `json:"estimated_value,omitempty"`
+	EstimatedValue string `json:"estimated_value,omitempty"`
 
-	ComputedValue float32 `json:"computed_value,omitempty"`
+	ComputedValue string `json:"computed_value,omitempty"`
 
 	Range *scalarRange `json:"range,omitempty"`
 
@@ -1171,9 +1171,9 @@ type Scalar struct {
 }
 
 type scalarRange struct {
-	Min float32 `json:"min,omitempty"`
+	Min string `json:"min,omitempty"`
 
-	Max float32 `json:"max,omitempty"`
+	Max string `json:"max,omitempty"`
 }
 
 // Schedule - Describes a schedule
@@ -1358,7 +1358,7 @@ type Tracking struct {
 	// If this value is `inactive`, the tracking URL is considered to be expired and the BAP should stop tracking the order.
 	Status *string `json:"status,omitempty" validate:"omitempty,oneof=active inactive"`
 
-	Tags *TagGroup `json:"tags,omitempty"`
+	Tags []TagGroup `json:"tags,omitempty"`
 }
 
 // Vehicle - Describes the properties of a vehicle used in a mobility service

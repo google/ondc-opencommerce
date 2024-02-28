@@ -24,6 +24,10 @@ locals {
     7 : { name : "send-update", filter : "attributes.action = \"update\"" },
     8 : { name : "send-rating", filter : "attributes.action = \"rating\"" },
     9 : { name : "send-support", filter : "attributes.action = \"support\"" },
+    10 : { name : "send-issue", filter : "attributes.action = \"issue\"" },
+    11 : { name : "send-issue-status", filter : "attributes.action = \"issue_status\"" },
+    10 : { name : "send-issue", filter : "attributes.action = \"issue\"" },
+    11 : { name : "send-issue-status", filter : "attributes.action = \"issue_status\"" },
   }
   callback_subscriptions = {
     0 : { name : "callback-on-search", filter : "attributes.action = \"on_search\"" },
@@ -36,6 +40,9 @@ locals {
     7 : { name : "callback-on-update", filter : "attributes.action = \"on_update\"" },
     8 : { name : "callback-on-rating", filter : "attributes.action = \"on_rating\"" },
     9 : { name : "callback-on-support", filter : "attributes.action = \"on_support\"" },
+    10 : { name : "callback-on-issue", filter : "attributes.action = \"on_issue\"" },
+    11 : { name : "callback-on-issue-status", filter : "attributes.action = \"on_issue_status\"" },
+
   }
 }
 

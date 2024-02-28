@@ -15,4 +15,11 @@
 variable "project_id" {
   type        = string
   description = "GCP Project ID"
+  default     = "ondc-l1-accl-180920232021"
+}
+
+variable "location" {
+  type        = string
+  description = "GCP Project Location"
+  default     = "asia-southeast1"
 }

@@ -31,7 +31,9 @@ data:
         "${pubsub.prefix}-send-cancel",
         "${pubsub.prefix}-send-update",
         "${pubsub.prefix}-send-rating",
-        "${pubsub.prefix}-send-support"
+        "${pubsub.prefix}-send-support",
+        "${pubsub.prefix}-send-issue",
+        "${pubsub.prefix}-send-issue-status"
       ],
       "instanceID": "${spanner.instance.name}",
       "databaseID": "${spanner.database.name}",

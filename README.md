@@ -1,151 +1,93 @@
-# ONDC Open Commerce
-
-ONDC aims to democratize access to commerce, by decoupling buyers, sellers and other stakeholders in the commerce ecosystem and making them interoperable through a common network. ONDC Open Commerce is an open source repository that provides code to the network participants in a way that they find it easy to integrate into the ONDC network, perform requisite commerce operations and never have to worry about integration, scalability and security.
-
-This solution is built on [ONDC v1.2.0](https://docs.google.com/document/d/1aRzox3_Dq0Q_SicIaKegdU7FpM5q8R1rjrA6vi8qF0E/edit) and leverages the following technologies:
-
-- [Golang](https://go.dev/)
-- [Bazel](https://bazel.build/)
-- [Terraform](https://www.terraform.io/)
-
-Value Proposition
-- Supports Traffic Shaping to protect retail backend systems - Allows customers to configure the shape the traffic to their systems
-- Extensible - Partners can fork the services to add value additions like rule engine to filter the requests, analytics & search catalogs
-- Portable Interface for existing ONDC participants - Accelerator’s interface is compatible with ONDC specification allowing participants to port to the service faster
-- Compatible with ONDC Latest Specification
-
-## New to ONDC
-
-In case you are new to the ONDC network, we recommend you go through the following documents, which should give you an overview of steps and development for connecting to the ONDC network.
-
-- [ONDC Development Guide](https://ondc-issue-logging-cohort1.atlassian.net/wiki/spaces/TG/pages/35160065/ONDC+Developer+Guide)
-- [ONDC Integration Guide](https://docs.google.com/presentation/d/1HPRXk3lVYKmyAFcApgukZuwHhIZ_VlqR/edit#slide=id.g142ae05b320_0_0)
-
-## Service Overview
-
-This section will describe the services available in this repository. All services are available in a form of source code, Docker images and Terraform modules for deploying them to GCP.
-
-#### Onboarding / Registration Service
-It implements `/on_subscribe` API and `/ondc-site-verification.html`, which both are required for onboarding to the ONDC network in `pre-production` and `production` environments.
-
-#### Key management Service
-It implements key generation and key rotation for the signing key and the encryption key.
-
-#### Core API Adapter
-It provides middleware components that sit between your open-commerce applications and the ONDC network. The middleware provides the following features.
-- sign and verify the authentication header.
-- validate incoming request payload based on the OpenAPI specification.
-- store transaction logs in the Spanner database.
-- convert an asynchronous communication into a synchronous communication.
-
-The adapter consists of 2 modules
-1. Buyer Platform for buyer app
-2. Seller Platform for seller app
+# ondc-google-accelerator
 
 
-## Requirements
 
-This solution is only applicable for ONDC network participants and open-commerce applications with the following properties
+## Getting started
 
-- Use Retail Domain.
-- Use [API Contract v1.2.0](https://docs.google.com/document/d/1aRzox3_Dq0Q_SicIaKegdU7FpM5q8R1rjrA6vi8qF0E/edit).
-- Use [OpenAPI Specification v1.0.31](https://app.swaggerhub.com/apis/ONDC/ONDC-Protocol-Retail/1.0.31#/).
-- Act as a buyer or non-msn seller role in the network. You can find out more about roles in ONDC, see [Role Selection](https://docs.google.com/presentation/d/1HPRXk3lVYKmyAFcApgukZuwHhIZ_VlqR/edit#slide=id.g2762262756f_71_128)
+To make it easy for you to get started with GitLab, here's a list of recommended next steps.
 
-## Getting Started
+Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
-### Prerequisites
+## Add your files
 
-The following is needed for building and deploying the services.
+- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
+- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
 
-- [Golang](https://go.dev/doc/install) ~> 1.20.7
-- [Bazel](https://bazel.build/install) ~> 6.3.1
-- [Terraform](https://developer.hashicorp.com/terraform/downloads) ~> 0.13
-
-(Optional) Once `bazel` is installed, you can make sure that all required dependencies are up-to-date by running
-`bazel run //:gazelle-update-repos && bazel run //:gazelle` 
-
-
-### Building Docker Images
-
-Docker images of ONDC Open Commerce services are required to be stored on your Artifact Registry. Terraform scripts will access your Artifact Registry for provision of the ONDC Open Commerce service. To create an Docker repository on Artifact Registry, see [Create standard repositories](https://cloud.google.com/artifact-registry/docs/repositories/create-repos#docker)
-
-We utilize `bazel` for building Docker images from Go source code and publishing them to the Artifact Registry.
-
-Here is an example command to build and publish a Docker image of a specific service.
-```shell
-bazel run //docker/publish/onboarding:server_image_pusher_onboarding --define DOCKER_REGISTRY="asia-southeast1-docker.pkg.dev" --define DOCKER_REPOSITORY="project-id/repo-name"
 ```
-For simple usage, shell scripts for building docker images are provided under the directory [docker/scripts/](docker/scripts/).
-```
-docker/scripts
-├── publish_all.sh
-├── publish_buyer.sh
-├── publish_keyrotation.sh
-├── publish_mockup.sh
-├── publish_onboarding.sh
-└── publish_seller.sh
+cd existing_repo
+git remote add origin https://gitlab.thewitslab.com/wil-workspace/WIL-ONDC-Products/ondc-google-accelerator.git
+git branch -M main
+git push -uf origin main
 ```
 
-You can build and publish all Docker images for all modules by running the following command:
-```shell
-# Change these variables to match your Docker repo
-DOCKER_REGISTRY="asia-southeast1-docker.pkg.dev"
-DOCKER_REPOSITORY="project-id/repo-name"
+## Integrate with your tools
 
-./docker/scripts/publish_all.sh $DOCKER_REGISTRY $DOCKER_REPOSITORY
-```
+- [ ] [Set up project integrations](https://gitlab.thewitslab.com/wil-workspace/WIL-ONDC-Products/ondc-google-accelerator/-/settings/integrations)
 
-You can build and publish all Docker images for a specific modules by running the following command:
-```shell
-# Change these variables to match your Docker repo
-DOCKER_REGISTRY="asia-southeast1-docker.pkg.dev"
-DOCKER_REPOSITORY="project-id/repo-name"
+## Collaborate with your team
 
-# Example: onboarding module
-./docker/scripts/publish_onboarding.sh $DOCKER_REGISTRY $DOCKER_REPOSITORY
-```
+- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
+- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
+- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
+- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
+- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
 
-### Terraform Deployment
+## Test and Deploy
 
-We provide a Terraform module for each service to help you deploy the services to GCP. If you are new to Terraform on Google Cloud, see the this [guide](https://cloud.google.com/docs/terraform/maturity)
+Use the built-in continuous integration in GitLab.
 
-There are example usages provided in the [terraform/examples/sample/](terraform/examples/sample/) folder. This should give you an example of how to utilize each module and connect them to work together.
+- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
+- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
+- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
+- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
+- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
 
-#### Modules
-This is a list of Terraform modules we provide.
-- [Buyer Module](./terraform/modules/buyer/) - Core API Adapter for Buyer app
-- [Seller Module](./terraform/modules/seller/) - Core API Adapter for Seller app
-- [Key Rotation Module](./terraform/modules/key-rotation/) - Key Rotation service
-- [Onboarding Module](./terraform/modules/onboarding/) - Onboarding service
-- [Load Balancer](./terraform/modules/helpers/loadbalancer/) - Helper Module to deploy Application Load Balancer
+***
 
-#### Note
-- Your patience is appreciated as certificate provisioning can take a long time to be completed (> 30 minutes).
+# Editing this README
 
-- The Anthos Service Mesh must be enabled ONLY ONCE. You are requested to put this code into the `main.tf` before using either buyer or seller module.
+When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
 
-```tf
-# REQUIRED! Enable Anthos Service Mesh
-# IMPORTANT! Create only once
-resource "google_gke_hub_feature" "servicemesh" {
-  provider = google-beta
+## Suggestions for a good README
 
-  location = "global"
-  name     = "servicemesh"
+Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
 
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-```
+## Name
+Choose a self-explaining name for your project.
 
-#### Troubleshooting
-While running the  `terraform apply` command on the root folder, you may potentially get an error like this:
-```sh
-Error: istio-system/istio-ingressgateway failed to fetch resource from kubernetes: context deadline exceeded
-```
-In parallel, you might see an `ImagePullBackOff` error in the GCP Console log. Such an error may occur because the ASM is not ready before Istio Ingress gets deployed, which may lead to ingress not being able to pull the required image in time.
+## Description
+Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
-Try running `terraform apply` once again. It should fix this error.
+## Badges
+On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
 
+## Visuals
+Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+
+## Installation
+Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+
+## Usage
+Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+
+## Support
+Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+
+## Roadmap
+If you have ideas for releases in the future, it is a good idea to list them in the README.
+
+## Contributing
+State if you are open to contributions and what your requirements are for accepting them.
+
+For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+
+You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+
+## Authors and acknowledgment
+Show your appreciation to those who have contributed to the project.
+
+## License
+For open source projects, say how it is licensed.
+
+## Project status
+If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.

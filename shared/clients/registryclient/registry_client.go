@@ -102,6 +102,7 @@ func (c *RegistryClient) PublicSigningKey(subscriberID, uniqueKeyID string, ondc
 	if len(responseBody) == 0 {
 		log.Errorf("DEBUG: lookup_request: %v", requestBody)
 		log.Errorf("DEBUG: lookup_request_json: %q", requestBodyJSON)
+		log.Errorf("DEBUG: Testing: %q", requestBodyJSON)
 		return nil, errors.New("Public Signing Keys are not found")
 	}
 
@@ -165,3 +166,4 @@ func (c *RegistryClient) RotateKeys(encryptionPublicKey, signingPublicKey, reque
 	}
 	return nil
 }
+

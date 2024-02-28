@@ -542,10 +542,7 @@ resource "kubectl_manifest" "app_gateways" {
 resource "kubectl_manifest" "app_deployments" {
   for_each = fileset(path.module, "manifests/app/deployments/**/*.yaml")
   yaml_body = templatefile("${path.module}/${each.value}", {
-    env_prefix = local.env_prefix,
-    project    = local.registry_project_id,
-    location   = local.registry_location,
-    repository = local.registry_repository,
+    env_prefix = local.env_prefix
   })
   force_conflicts = true
   force_new       = true

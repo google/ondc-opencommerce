@@ -32,7 +32,9 @@ data:
         "${pubsub.prefix}-callback-on-cancel",
         "${pubsub.prefix}-callback-on-update",
         "${pubsub.prefix}-callback-on-rating",
-        "${pubsub.prefix}-callback-on-support"
+        "${pubsub.prefix}-callback-on-support",
+        "${pubsub.prefix}-callback-on-issue",
+        "${pubsub.prefix}-callback-on-issue-status"
       ],
       "ONDCEnvironment": "${ondc_environment}"
     }

@@ -43,35 +43,35 @@ terraform {
 
 # Configure GCP project id
 provider "google" {
-  project = var.project_id
+  project     = var.project_id
 }
 
 # Configure GCP beta project id
 provider "google-beta" {
-  project = var.project_id
+  project     = var.project_id
 }
 
 provider "kubectl" {}
 
 locals {
-  buyer_app_url     = "http://10.1.0.2:8000"
+  buyer_app_url     = "https://premium-lion-especially.ngrok-free.app/protocol/v1"
   seller_system_url = "https://seller-systems-service.com"
-  registry_url      = "https://preprod.registry.ondc.org/ondc"
-  gateway_url       = "https://preprod.gateway.ondc.org"
+  registry_url      = "https://staging.registry.ondc.org/"
+  gateway_url       = "https://staging.gateway.proteantech.in"
 
-  subscriber_id    = "example.com"
-  request_id       = "484be40a-3806-475d-a168-a6ec03d7b310"
-  key_id           = "ec7ae8e8-f211-40ac-946f-a3407d0a76bb"
-  ondc_environment = "pre-production"
+  subscriber_id    = "ondc-mock-server-dev.thewitslab.com"
+  request_id       = "87856793-b30e-438e-a8c7-6eb782788e00"
+  key_id           = "87856793-b30e-438e-a8c7-6eb782788e00"
+  ondc_environment = "preprod"
 
-  location = "us-central1"
+  location = "asia-southeast1"
 }
 
 locals {
   artifact_registry = {
     project_id = var.project_id
     location   = var.location
-    repository = "ondc-open-commerce"
+    repository = "ondc-l1-repo"
   }
 }
 
@@ -89,7 +89,7 @@ resource "google_gke_hub_feature" "servicemesh" {
 resource "google_service_account" "dev_buyer_cluster" {
   provider = google
 
-  account_id   = "dev-buyer-cluster"
+  account_id   = "dev-buyer-sa"
   display_name = "Dev Buyer Service Account"
 }
 
@@ -97,7 +97,7 @@ resource "google_service_account" "dev_buyer_cluster" {
 resource "google_service_account" "dev_seller_cluster" {
   provider = google
 
-  account_id   = "dev-seller-cluster"
+  account_id   = "dev-seller-sa"
   display_name = "Dev Seller Service Account"
 }
 
@@ -150,7 +150,7 @@ module "dev_buyer_app" {
   artifact_registry = local.artifact_registry
 
   region                 = local.location
-  zones                  = ["us-central1-c"]
+  zones                  = ["asia-southeast1-a", "asia-southeast1-b", "asia-southeast1-c"]
   network_name           = "dev-buyer-network"
   subnet_name            = "dev-buyer-subnet"
   subnet_ip              = "10.0.0.0/18"
@@ -158,7 +158,7 @@ module "dev_buyer_app" {
   ip_range_services_name = "dev-buyer-ip-range-services"
   ip_range_pods          = "192.168.0.0/18"
   ip_range_services      = "192.168.64.0/18"
-  buyer_app_allow_hosts  = ["10.0.0.7/18"]
+  buyer_app_allow_hosts  = ["*"]
 
   horizontal_pod_autoscaling = false
   node_pool_name             = "dev-buyer-node-pool"
@@ -174,7 +174,7 @@ module "dev_buyer_app" {
 
   key_id         = local.key_id
   subscriber_id  = local.subscriber_id
-  subscriber_url = "https://example.com/buyer/bap"
+  subscriber_url = "https://ondc-v2-buyer-app.thewitslab.com/buyer/bap"
 
   secret_id = module.dev_key_rotation.secret_id
 
@@ -197,7 +197,7 @@ module "dev_seller_app" {
   artifact_registry = local.artifact_registry
 
   region                 = local.location
-  zones                  = ["us-central1-c"]
+  zones                  = ["asia-southeast1-a", "asia-southeast1-b", "asia-southeast1-c"]
   network_name           = "dev-seller-network"
   subnet_name            = "dev-seller-subnet"
   subnet_ip              = "10.0.0.0/18"
@@ -234,10 +234,10 @@ module "dev-loadbalancer" {
   source = "../../modules/helpers/loadbalancer"
 
   env_prefix = "dev-"
-  name       = "example-lb"
+  name       = "wits-ondc-lb"
 
-  address                   = "122.96.84.212"
-  domains                   = ["example.com"]
+  address                   = "34.107.239.220"
+  domains                   = ["ondc-v2-buyer-app.thewitslab.com"]
   random_certificate_suffix = true
 
   buyer = {

@@ -148,7 +148,7 @@ func (s *server) handleSubscription(ctx context.Context, sub *pubsub.Subscriptio
 
 		responseBody, err := io.ReadAll(response.Body)
 		if err != nil {
-			log.Errorf("Reading response body failed: %v", err)
+			log.Errorf("Reading response body failed:: %v", err)
 			return
 		}
 

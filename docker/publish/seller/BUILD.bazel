@@ -20,6 +20,7 @@ container_push(
     image = "//seller-platform/bpp-api:image",
     registry = "$(DOCKER_REGISTRY)",
     repository = "$(DOCKER_REPOSITORY)/bpp-apis",
+    tag = "bpp_apis_customtag",
 )
 
 container_push(
@@ -28,6 +29,7 @@ container_push(
     image = "//seller-platform/seller-adapter-service:image",
     registry = "$(DOCKER_REGISTRY)",
     repository = "$(DOCKER_REPOSITORY)/seller-adapter-service",
+    tag = "seller_adapter_service_customtag",
 )
 
 container_push(
@@ -36,4 +38,5 @@ container_push(
     image = "//seller-platform/callback-action-service:image",
     registry = "$(DOCKER_REGISTRY)",
     repository = "$(DOCKER_REPOSITORY)/callback-action-service",
+    tag = "callback_action_service_customtag",
 )

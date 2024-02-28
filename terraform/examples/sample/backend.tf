@@ -14,7 +14,7 @@
 
 terraform {
   backend "gcs" {
-    bucket = "bit-ondc_dev"
+    bucket = "ondc-l1-tfs-stg"
     prefix = "terraform/state"
   }
 }
